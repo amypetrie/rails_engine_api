@@ -2,7 +2,17 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require_relative 'config/application'
+require 'csv' #added
 
 Rails.application.load_tasks
 
-Rake.application.options.trace_rules = true #added from tutorial
+#added
+# namespace :import do
+#   desc "import customers from csv"
+#   task customers: :environment do
+#     filename = File.join Rails.root, "customers.csv"
+#     CSV.foreach(filename, headers: true) do |row|
+#       Customer.create! row.to_hash
+#     end
+#   end
+# end
