@@ -8,4 +8,9 @@ class InvoiceItem < ApplicationRecord
     quantity * unit_price / 100
   end
 
+  def self.successful_invoice_items
+    ids = Invoice.successful_invoices.ids
+    InvoiceItem.where(invoice_id: ids)
+  end
+
 end

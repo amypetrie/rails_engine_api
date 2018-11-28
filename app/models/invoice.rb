@@ -12,9 +12,13 @@ class Invoice < ApplicationRecord
     total.sum
   end
 
-  #havent tried in console
-  def self.invoices_with_successful_transactions
+  def self.successful_invoices
+    ids = Transaction.successful_transactions.successful_invoice_ids
+    Invoice.where(id: ids)
+  end
 
+  def self.successful_merchant_ids
+    Invoice.successful_invoices.map {|i| i.merchant_id}
   end
 
 end
