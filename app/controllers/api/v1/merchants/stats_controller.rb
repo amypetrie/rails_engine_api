@@ -1,11 +1,16 @@
 class Api::V1::Merchants::StatsController < ApplicationController
 
   def index
-    render json: MerchantSerializer.new(Merchant.all)
+    if params["params"].first == "most_revenue"
+      render json: MerchantSerializer.new(Merchant.top_merchants_by_revenue(5))
+    else
+    end
   end
 
   def stats_params
-    params.permit(:quantity, :date)
+    params.permit(:quantity, :date, :params)
   end
 
 end
+
+# /api/v1/merchants/most_revenue?quantity=x

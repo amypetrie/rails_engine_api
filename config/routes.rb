@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         get '/find_all', to: "search#index"
         get '/random', to: "search#index", params: "random"
         get '/find', to: "search#show"
-        get '/most_revenue', to: "stats#index", params: "most_revenue"
+        get '/most_revenue', to: "stats#index", params: ["most_revenue", "quantity"]
         get '/most_items', to: "stats#index", params: "most_items"
         get '/revenue', to: "stats#index", params: "revenue"
       end
@@ -15,3 +15,5 @@ Rails.application.routes.draw do
   end
 
 end
+
+# GET /api/v1/merchants/most_revenue?quantity=x
