@@ -1,5 +1,5 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # merchants = create_list(:merchant, 10)
 end
