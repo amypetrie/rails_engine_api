@@ -104,12 +104,9 @@ require 'rails_helper'
       merchants = create_list(:merchant, 10)
       get "/api/v1/merchants/random"
       merchant = JSON.parse(response.body)
-
       expect(response).to be_successful
-      expect(merchant["data"].count).to eq 1
+      expect(merchant.count).to eq 1
     end
-
-    # GET /api/v1/merchants/most_revenue?quantity=x returns the top x merchants ranked by total revenue
 
     it 'sends top merchants by revenue for quantity' do
       # merchants =

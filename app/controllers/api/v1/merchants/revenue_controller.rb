@@ -1,13 +1,18 @@
+require 'time'
 class Api::V1::Merchants::RevenueController < ApplicationController
 
   def index
-    render json: MerchantSerializer.new(Merchant.top_merchants_by_revenue(params["quantity"]))
+    # binding.pry
+    render json: MerchantSerializer.new(Merchant.top_merchants_by_revenue(revenue_params))
   end
 
   def show
-    render json: InvoiceItemSerializer.new(InvoiceItem.revenue_for_date(params["date"])
+    # binding.pry
+    params[:date] == params[:date].to_time
+    render json: InvoiceItemSerializer.new(InvoiceItem.revenue_for_date(revenue_params))
+  end
 
-private
+  private
   def revenue_params
     params.permit(:quantity, :date)
   end
