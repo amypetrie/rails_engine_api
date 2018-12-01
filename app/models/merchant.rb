@@ -3,11 +3,6 @@ class Merchant < ApplicationRecord
   has_many :invoices
 
 
-  #find sum of invoice_items by merchant
-    #sum(invoice_total(invoices).group_by merchant_id)
-    #sort by invoice_total
-
-
   def self.top_merchants_by_revenue(quantity)
     Merchant
     .select("merchants.*, SUM(invoice_items.quantity*invoice_items.unit_price) as revenue")
