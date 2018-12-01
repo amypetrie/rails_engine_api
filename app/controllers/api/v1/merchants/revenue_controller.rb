@@ -3,7 +3,7 @@ class Api::V1::Merchants::RevenueController < ApplicationController
 
   def index
     # binding.pry
-    render json: MerchantSerializer.new(Merchant.top_merchants_by_revenue(revenue_params))
+    render json: MerchantSerializer.new(Merchant.top_merchants_by_revenue(revenue_params[:quantity]))
   end
 
   def show
