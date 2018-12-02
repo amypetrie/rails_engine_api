@@ -1,23 +1,18 @@
 class Api::V1::Merchants::SearchController < ApplicationController
 
   def show
-    parameter = search_params.keys.first.to_sym unless search_params.keys.first == nil
-    if parameter == :name
-      render json: MerchantSerializer.new(Merchant.find_by("lower(name) = ?", search_params[parameter].downcase))
-    else
-      render json: MerchantSerializer.new(Merchant.find_by(parameter => search_params[parameter]))
+    if search_params[:name]
+      render json: MerchantSerializer.new(Merchant.find_by("lower(name) = ?", search_params[:name].downcase))
+    elsif
+      render json: MerchantSerializer.new(Merchant.find_by(params[:id]))
     end
   end
 
   def index
-    parameter = search_params.keys.first.to_sym unless search_params.keys.first == nil
-    if parameter == :name
-      render json: MerchantSerializer.new(Merchant.where("lower(name) = ?", search_params[parameter].downcase))
-    elsif params[:params] == "random"
-      ids = Merchant.pluck(:id)
-      render json: MerchantSerializer.new(Merchant.where(id: ids.sample))
+    if search_params[:name]
+      render json: MerchantSerializer.new(Merchant.where("lower(name) = ?", search_params[:name].downcase))
     else
-      render json: MerchantSerializer.new(Merchant.where(parameter => search_params[parameter]))
+      render json: MerchantSerializer.new(Merchant.where(search_params))
     end
   end
 
