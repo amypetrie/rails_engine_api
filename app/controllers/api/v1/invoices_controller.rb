@@ -8,6 +8,10 @@ class Api::V1::InvoicesController < ApplicationController
     end
   end
 
+  def show
+    render json: InvoiceSeriaizer.new(Invoice.find(params[:id]))
+  end
+
   def invoice_params
     params.permit(:quantity, :date, :params, :merchant_id)
   end

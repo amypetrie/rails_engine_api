@@ -1,12 +1,10 @@
 class Api::V1::Merchants::SearchController < ApplicationController
 
   def show
-    parameter = search_params.keys.first.to_sym unless search_params.keys.first == nil
-    if parameter == :name
-      render json: MerchantSerializer.new(Merchant.find_by("lower(name) = ?", search_params[parameter].downcase))
-      #change data type of names to be downcased
-    else
-      render json: MerchantSerializer.new(Merchant.find_by(search_params))
+    if search_params[:name]
+      render json: MerchantSerializer.new(Merchant.find_by("lower(name) = ?", search_params[:name].downcase))
+    elsif
+      render json: MerchantSerializer.new(Merchant.find_by(params[:id]))
     end
   end
 

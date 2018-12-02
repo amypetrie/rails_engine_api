@@ -8,8 +8,10 @@ class Api::V1::Merchants::RevenueController < ApplicationController
 
   def show
     # binding.pry
-    params[:date] == params[:date].to_time
-    render json: InvoiceItemSerializer.new(InvoiceItem.revenue_for_date(revenue_params))
+    if revenue_params[:date]
+      render json: InvoiceItemSerializer.new(InvoiceItem.revenue_for_date(revenue_params[:date]))
+    else
+    end
   end
 
   private
