@@ -7,6 +7,8 @@ class Api::V1::Transactions::SearchController < ApplicationController
       render json: TransactionSerializer.new(Transaction.find_by(created_at: search_params[:created_at]))
     elsif search_params[:updated_at]
       render json: TransactionSerializer.new(Transaction.find_by(updated_at: search_params[:updated_at]))
+    elsif params[:id]
+      render json: InvoiceSerializer.new(Invoice.joins(:transactions).find_by("transactions.id = ?", params[:id].to_i))
     else
       render json: TransactionSerializer.new(Transaction.find_by(search_params))
     end
@@ -30,6 +32,6 @@ class Api::V1::Transactions::SearchController < ApplicationController
 
 private
   def search_params
-    params.permit(:invoice_id, :id, :created_at, :updated_at, :result, :credit_card_number)
+    params.permit(:invoice_id, :id, :created_at, :updated_at, :result, :credit_card_number, )
   end
 end
