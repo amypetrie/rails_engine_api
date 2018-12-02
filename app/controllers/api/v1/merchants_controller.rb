@@ -5,7 +5,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    if params[:id] == "random"
+    if merchant_params[:id] == "random"
       id = Merchant.pluck(:id).sample
       render json: MerchantSerializer.new(Merchant.find(id))
     else
@@ -13,4 +13,8 @@ class Api::V1::MerchantsController < ApplicationController
     end
   end
 
+private
+  def merchant_params
+    params.permit(:name, :id, :created_at, :updated_at, :random)
+  end
 end

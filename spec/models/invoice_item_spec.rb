@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe InvoiceItem, type: :model do
+  describe "validations" do
+    it {is_expected.to belong_to(:item)}
+    it {is_expected.to belong_to(:invoice)}
+  end
+
   describe "class methods" do
-    it ".revenue_for_date" do
+    xit ".revenue_for_date" do
       customer_1, customer_2, customer_3, customer_4, customer_5, customer_6 = create_list(:customer, 6)
 
       merchant_1, merchant_2, merchant_3, merchant_4, merchant_5, merchant_6 = create_list(:merchant, 6)

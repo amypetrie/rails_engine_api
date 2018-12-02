@@ -5,7 +5,12 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def show
-    render json: CustomerSerializer.new(Customer.find(params[:id]))
+    if params[:id] == "random"
+      id = Merchant.pluck(:id).sample
+      render json: CustomerSerializer.new(Customer.find(id))
+    else
+      render json: CustomerSerializer.new(Customer.find(params[:id]))
+    end
   end
 
 end

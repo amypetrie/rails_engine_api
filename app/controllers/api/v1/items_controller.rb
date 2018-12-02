@@ -1,8 +1,8 @@
 class Api::V1::ItemsController < ApplicationController
 
   def index
-    if params[:merchant_id]
-      render json: ItemSerializer.new(Item.where(merchant_id: params[:merchant_id]))
+    if item_params[:merchant_id]
+      render json: ItemSerializer.new(Item.where(merchant_id: item_params[:merchant_id]))
     else
       render json: ItemSerializer.new(Item.all)
     end
@@ -13,7 +13,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def item_params
-    params.permit(:quantity, :date, :merchant_id)
+    params.permit(:name, :id, :created_at, :upated_at, :quantity, :date, :merchant_id)
   end
 
 end
