@@ -19,6 +19,10 @@ Rails.application.routes.draw do
         get "/find_all", to: "search#index"
         get "/find", to: "search#show"
       end
+      namespace :invoices do
+        get "/find_all", to: "search#index"
+        get "/find", to: "search#show"
+      end
       resources :merchants, only: [:index, :show] do
         resources :items, only: [:index]
         resources :invoices, only: [:index]
@@ -32,8 +36,8 @@ Rails.application.routes.draw do
         resources :invoices_items, only: [:index]
       end
       resources :invoices, only: [:index, :show] do
-        resources :merchants, only:  [:show]
-        resources :customer, only:  [:show]
+        resource :customer, only: [:show]
+        resource :merchant, only: [:show]
         resources :items, only:  [:index]
         resources :transactions, only:  [:index]
         resources :invoice_items, only:  [:index]
@@ -43,7 +47,7 @@ Rails.application.routes.draw do
         resources :items, only: [:show]
       end
       resources :transactions, only: [:index, :show] do
-        get "/invoice", to: "invoices#show"
+        resource :invoice, only: [:show]
       end
     end
   end

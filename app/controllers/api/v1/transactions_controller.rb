@@ -3,6 +3,8 @@ class Api::V1::TransactionsController < ApplicationController
   def index
     if transaction_params[:customer_id]
       render json: TransactionSerializer.new(Transaction.by_customer(transaction_params[:customer_id]))
+    elsif transaction_params[:invoice_id]
+      render json: TransactionSerializer.new(Transaction.where(invoice_id: transaction_params[:invoice_id]))
     else
       render json: TransactionSerializer.new(Transaction.all)
     end
