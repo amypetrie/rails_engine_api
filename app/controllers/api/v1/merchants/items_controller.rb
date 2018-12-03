@@ -1,6 +1,7 @@
 class Api::V1::Merchants::ItemsController < ApplicationController
 
   def index
+    binding.pry
     render json: MerchantSerializer.new(Merchant.top_merchants_by_items_sold(quantity_params))
   end
 
