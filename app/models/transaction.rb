@@ -1,13 +1,8 @@
 class Transaction < ApplicationRecord
   belongs_to :invoice
 
-  def self.successful_transactions
-    Transaction.where(result: "success")
+  def self.by_customer(customer_id)
+    Transaction.joins(invoice: :customer).where('customers.id = ?', customer_id)
   end
-
-  def self.successful_invoice_ids
-    Transaction.successful_transactions.map {|t| t.invoice_id}
-  end
-
 
 end

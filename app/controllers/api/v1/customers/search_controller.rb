@@ -10,7 +10,7 @@ class Api::V1::Customers::SearchController < ApplicationController
     elsif search_params[:updated_at]
       render json: CustomerSerializer.new(Customer.find_by(updated_at: search_params[:updated_at]))
     else
-      render json: CustomerSerializer.new(Customer.find_by(search_params[:id]))
+      render json: CustomerSerializer.new(Customer.find_by(search_params))
     end
   end
 
